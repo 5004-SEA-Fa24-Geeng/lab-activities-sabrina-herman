@@ -59,7 +59,10 @@ public class BGGeekXMLReader {
                     String name = attributes.getValue("value");
                     current.put("name", name);
                 }
-            } // add more for yearPublished here
+            } else if (qName.equalsIgnoreCase("yearpublished")) {
+                String yearPublished = attributes.getValue("value");
+                current.put("yearPublished", yearPublished);
+            }
         }
 
         @Override
@@ -67,7 +70,14 @@ public class BGGeekXMLReader {
             if (qName.equalsIgnoreCase("item")) {
                 games.add(buildRecordFromMap(current));
                 current = null;
-            } // add an else that handles description and thumbnail
+            } //else if (qName.equalsIgnoreCase("description")) {
+                //games.add(buildRecordFromMap(current));
+                //current = null;
+            //} else if (qName.equalsIgnoreCase("thumbnail")) {
+            //games.add(buildRecordFromMap(current));
+                //current = null;
+            //}
+                // add an else that handles description and thumbnail
         }
 
         @Override

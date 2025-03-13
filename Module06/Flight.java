@@ -1,5 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 public class Flight implements Comparable<Flight> {
@@ -24,13 +23,27 @@ public class Flight implements Comparable<Flight> {
 
     @Override
     public int compareTo(Flight o) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return this.getFlightID().compareTo(o.getFlightID());
     }
 
     @Override
     public String toString() {
         return "Flight{" + "airline='" + airline + '\'' + ", flightNumber=" + flightNumber
                 + ", airlineCode='" + airlineCode + '\'' + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this.getFlightID().equals(((Flight) o).getFlightID())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getFlightID().hashCode();
     }
 
 
@@ -54,15 +67,26 @@ public class Flight implements Comparable<Flight> {
         System.out.println(flights);
 
         // TODO: Create a lambda expression to sort the flights by flight number
-
+        flights.sort((flight1, flight2) -> flight1.compareTo(flight2));
         System.out.println(flights);
 
 
         // TODO: Add code using a TreeSet to store the flights in order
+        Set<Flight> flightSet = new TreeSet<>(flights);
+        System.out.println(flightSet);
+
 
 
 
         // TODO: Add code to store the flights in a TreeMap
+        TreeMap<Flight, Integer> flightSeats = new TreeMap<>();
+
+        // assuming F1, F2, F3 are already created
+        flightSeats.put(f1, 100);
+        flightSeats.put(f2, 200);
+        flightSeats.put(f3, 300);
+
+        System.out.println(flightSeats);
         // use the flight as key, and Integer as value - storing the number of seats on the flight
     }
 }
